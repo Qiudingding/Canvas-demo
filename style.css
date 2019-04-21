@@ -6,7 +6,7 @@ ul,ol{
 	padding: 0;
 }
 #canvas{
-  background: white;
+  background: rgb(300, 200, 150);
   display: block;
   position: fixed;
   top: 0;
@@ -79,11 +79,15 @@ body{
 }
 .sizes > .thin{
 	height: 0;
-	width: 20px;
-	border-top: 3px solid black;
+	width: 40px;
+	border-top: 4px solid black;
 }
 .sizes > .thick{
 	height: 0;
-	width: 20px;
-	border-top: 6px solid black;
+	width: 40px;
+	border-top: 8px solid black;
+}
+.sizes > li.active{
+  box-shadow: 2px 2px 3px 0px rgba(0,0,0,0.75);
+  transform: scale(1.2);
 }

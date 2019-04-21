@@ -1,11 +1,11 @@
 
-var yyy = document.getElementById('canvas');
-var context = yyy.getContext('2d');
-var lineWidth = 5
+var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+var lineWidth = 2
 
-autoSetCanvasSize(yyy)
+autoSetCanvasSize(canvas)
 
-listenToUser(yyy)
+listenToUser(canvas)
 
 
 var eraserEnabled = false
@@ -55,16 +55,20 @@ bluepen.onclick = function(){
 }
 
 thin.onclick = function(){
-  lineWidth = 5
+  lineWidth = 2
+  thin.classList.add('active')
+  thick.classList.remove('active')
 }
 thick.onclick = function(){
-  lineWidth = 10
+  lineWidth = 4
+  thick.classList.add('active')
+  thin.classList.remove('active')
 }
 clear.onclick = function(){
-  context.clearRect(0, 0, yyy.width, yyy.height)
+  context.clearRect(0, 0, canvas.width, canvas.height)
 }
 save.onclick = function(){
-  var url = yyy.toDataURL("image/png")
+  var url = canvas.toDataURL("image/png")
   var a = document.createElement('a')
   document.body.appendChild(a)
   a.href = url
@@ -98,6 +102,8 @@ function drawCircle(x, y, radius) {
 }
 
 function drawLine(x1, y1, x2, y2) {
+  context.lineJoin = "round"
+  context.lineCap = "round"
   context.beginPath();
   context.moveTo(x1, y1) // 起点
   context.lineWidth = lineWidth
@@ -117,7 +123,6 @@ function listenToUser(canvas) {
 if(document.body.ontouchstart !==undefined){
     //触屏设备
   canvas.ontouchstart = function(aaa){
-    console.log('开始摸我了')
     var x = aaa.touches[0].clientX
     var y = aaa.touches[0].clientY
     using = true
@@ -131,7 +136,6 @@ if(document.body.ontouchstart !==undefined){
       }
 }
 canvas.ontouchmove = function(aaa){
-  console.log('摸动')
   var x = aaa.touches[0].clientX
   var y = aaa.touches[0].clientY
 
@@ -150,7 +154,6 @@ canvas.ontouchmove = function(aaa){
 
 }
 canvas.ontouchend = function(){
-  console.log('摸了')
   using = false
 }
   }else{
